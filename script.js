@@ -4,7 +4,7 @@ document.getElementById('calculateButton').addEventListener('click', calculate);
 function calculate() {
     // 입력된 값을 불러와서 변수에 저장 (만원 단위는 10000으로 변환)
     let initialInvestment = parseFloat(document.getElementById('initialInvestment').value) * 10000; // 초기 투자금
-    let dividendRate = parseFloat(document.getElementById('dividendRate').value) / 100; // 배당률
+    let dividendRate = parseFloat(document.getElementById('    dividendRate').value) / 100; // 배당률
     let dividendGrowthRate = parseFloat(document.getElementById('dividendGrowthRate').value) / 100; // 배당 성장률
     let stockGrowthRate = parseFloat(document.getElementById('stockGrowthRate').value) / 100; // 주가 상승률
     let monthlyInvestment = parseFloat(document.getElementById('monthlyInvestment').value) * 10000; // 월 투자금
@@ -35,10 +35,10 @@ function calculate() {
         // 계산 결과를 배열에 저장
         results.push({
             year: year,
-            yearEndDividend: currentDividend, // 연말 배당금
-            yearEndAssets: totalAssets, // 연말 자산
-            cumulativeInvestment: totalInvestment, // 누적 투자 원금
-            cumulativeReinvestedDividends: totalReinvestedDividends // 누적 재투자 배당금
+            yearStartDividend: currentDividend / 10000, // 연초 배당금 (만원 단위)
+            yearEndAssets: totalAssets / 10000, // 연말 자산 (만원 단위)
+            cumulativeInvestment: totalInvestment / 10000, // 누적 투자 (만원 단위)
+            cumulativeReinvestedDividends: totalReinvestedDividends / 10000 // 누적 재투자 배당금 (만원 단위)
         });
 
         // 다음 연도 배당금 계산 (배당 성장률 반영)
@@ -48,7 +48,7 @@ function calculate() {
     }
 
     // 계산된 결과를 화면에 출력
-    displayResults(results, targetMonthlyDividend, year);
+    displayResults(results, targetMonthlyDividend / 10000, year);
 }
 
 // 계산된 결과를 화면에 표시하는 함수
@@ -61,10 +61,10 @@ function displayResults(results, targetMonthlyDividend, yearsTaken) {
         let row = document.createElement('tr');
         row.innerHTML = `
             <td>${result.year} 년</td>
-            <td>${Math.floor(result.yearEndDividend).toLocaleString()} 원</td>
-            <td>${Math.floor(result.yearEndAssets).toLocaleString()} 원</td>
-            <td>${Math.floor(result.cumulativeInvestment).toLocaleString()} 원</td>
-            <td>${Math.floor(result.cumulativeReinvestedDividends).toLocaleString()} 원</td>
+            <td>${Math.floor(result.yearEndDividend).toLocaleString()} 만원</td>
+            <td>${Math.floor(result.yearEndAssets).toLocaleString()} 만원</td>
+            <td>${Math.floor(result.cumulativeInvestment).toLocaleString()} 만원</td>
+            <td>${Math.floor(result.cumulativeReinvestedDividends).toLocaleString()} 만원</td>
         `;
         tbody.appendChild(row);
     });
