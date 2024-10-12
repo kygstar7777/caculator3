@@ -57,11 +57,11 @@ function calculate() {
         // 연간 배당금 계산 (월 투자금에 대한 배당금)
         let annualDividendsFromInvestment = annualInvestment * dividendRate * (1 - taxRate) * (1 - inflationRate); 
 
-        // 총 연간 배당금
-        let annualDividends = currentDividend + annualDividendsFromInvestment; 
+        // 1년 차에 발생한 배당금의 재투자에 대해서는 성장률만 반영하고, 중복 계산 방지
+        let yearStartDividend = currentDividend * (1 + dividendGrowthRate); // 배당 성장률 반영
 
-        // 재투자 배당금 계산
-        totalReinvestedDividends += annualDividends * reinvestmentRate; 
+        // 재투자 배당금 계산 (재투자된 배당금에 대한 배당금이 중복되지 않게 함)
+        totalReinvestedDividends += annualDividendsFromInvestment * reinvestmentRate; 
 
         // 누적 투자금 업데이트
         totalInvestment += annualInvestment; 
@@ -72,15 +72,15 @@ function calculate() {
         // 계산된 결과를 배열에 저장
         results.push({
             year: year, // 연도
-            yearStartDividend: currentDividend / 10000, // 연초 배당금 (만원 단위)
+            yearStartDividend: yearStartDividend / 10000, // 연초 배당금 (만원 단위)
             yearEndAssets: totalAssets / 10000, // 연말 자산 (만원 단위)
             cumulativeInvestment: totalInvestment / 10000, // 누적 투자 (만원 단위)
             cumulativeReinvestedDividends: totalReinvestedDividends / 10000 // 누적 재투자 배당금 (만원 단위)
         });
 
-        // 배당 성장률을 적용한 다음 해 배당금 업데이트
-        currentDividend = annualDividends * (1 + dividendGrowthRate);
-        
+        // 다음 해 배당금 계산 (배당 성장률 반영)
+        currentDividend = (totalInvestment + totalReinvestedDividends) * dividendRate * (1 - taxRate) * (1 - inflationRate);
+
         // 매월 투자금 증가율 반영
         monthlyInvestment *= (1 + monthlyInvestmentGrowthRate); 
         
