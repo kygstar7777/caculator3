@@ -42,7 +42,7 @@ function calculate() {
         });
 
         // 다음 연도 배당금 계산 (배당 성장률 반영)
-        currentDividend = (totalInvestment + totalReinvestedDividends) * dividendRate * (1 - taxRate) * (1 - inflationRate) * (1 + dividendGrowthRate) * reinvestmentRate;
+        currentDividend = (totalInvestment + totalReinvestedDividends) * dividendRate * (1 - taxRate) * (1 - inflationRate) * reinvestmentRate;
         monthlyInvestment *= (1 + monthlyInvestmentGrowthRate); // 매월 투자금 증가율 반영
         year++; // 연도 증가
     }
