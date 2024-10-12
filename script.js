@@ -20,7 +20,7 @@ function calculate() {
     let totalInvestment = initialInvestment; // 총 투자금 (누적)
     let totalReinvestedDividends = 0; // 총 재투자 배당금 (누적)
     let totalAssets = initialInvestment; // 총 자산 (초기 투자금으로 시작)
-    let currentDividend = initialInvestment * dividendRate * (1 - taxRate) * (1 - inflationRate); // 초기 투자금으로 계산된 배당금
+    let currentDividend = initialInvestment * dividendRate * (1 - taxRate) * (1 - inflationRate) * reinvestmentRate; // 초기 투자금으로 계산된 배당금
 
     // 목표 월 배당금에 도달할 때까지 계산
     while ((currentDividend / 12) < targetMonthlyDividend) {
@@ -42,7 +42,7 @@ function calculate() {
         });
 
         // 다음 연도 배당금 계산 (배당 성장률 반영)
-        currentDividend = (totalInvestment + totalReinvestedDividends) * dividendRate * (1 - taxRate) * (1 - inflationRate);
+        currentDividend = (totalInvestment + totalReinvestedDividends) * dividendRate * (1 - taxRate) * (1 - inflationRate) * (1 + dividendGrowthRate) * reinvestmentRate;
         monthlyInvestment *= (1 + monthlyInvestmentGrowthRate); // 매월 투자금 증가율 반영
         year++; // 연도 증가
     }
