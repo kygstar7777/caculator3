@@ -1,66 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <!-- 모바일 친화적인 화면을 위해 viewport 설정 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dividend Calculator</title>
+    <title>배당금 계산기 (Dividend Calculator)</title>
+    <!-- 외부 CSS 파일 연결 -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- 페이지 전체 컨테이너 -->
     <div class="container">
-        <h1>Dividend Calculator</h1>
-        <form id="calculator-form">
-            <label for="initialInvestment">Initial Investment (만원): </label>
-            <input type="number" id="initialInvestment" required><br>
+        <!-- 페이지 제목 -->
+        <h1>배당금 계산기 (Dividend Calculator)</h1>
 
-            <label for="dividendYield">Dividend Yield (%): </label>
-            <input type="number" id="dividendYield" step="0.01" required><br>
+        <!-- 입력 필드: 초기 투자금 -->
+        <div class="form-group">
+            <label for="initialInvestment">초기 투자금 (Initial Investment, 만원):</label>
+            <input type="number" id="initialInvestment">
+        </div>
 
-            <label for="dividendGrowth">Dividend Growth Rate (%): </label>
-            <input type="number" id="dividendGrowth" step="0.01" required><br>
+        <!-- 입력 필드: 배당률 -->
+        <div class="form-group">
+            <label for="dividendRate">배당률 (Dividend Rate, %):</label>
+            <input type="number" id="dividendRate">
+        </div>
 
-            <label for="stockGrowth">Stock Price Growth Rate (%): </label>
-            <input type="number" id="stockGrowth" step="0.01" required><br>
+        <!-- 입력 필드: 배당 성장률 -->
+        <div class="form-group">
+            <label for="dividendGrowthRate">배당 성장률 (Dividend Growth Rate, %):</label>
+            <input type="number" id="dividendGrowthRate">
+        </div>
 
-            <label for="monthlyInvestment">Monthly Investment (만원): </label>
-            <input type="number" id="monthlyInvestment" required><br>
+        <!-- 입력 필드: 주가 상승률 -->
+        <div class="form-group">
+            <label for="stockGrowthRate">주가 상승률 (Stock Growth Rate, %):</label>
+            <input type="number" id="stockGrowthRate">
+        </div>
 
-            <label for="monthlyIncreaseRate">Monthly Investment Increase Rate (%): </label>
-            <input type="number" id="monthlyIncreaseRate" step="0.01" required><br>
+        <!-- 입력 필드: 월 투자금 -->
+        <div class="form-group">
+            <label for="monthlyInvestment">월 투자금 (Monthly Investment, 만원):</label>
+            <input type="number" id="monthlyInvestment">
+        </div>
 
-            <label for="reinvestmentRate">Dividend Reinvestment Rate (%): </label>
-            <input type="number" id="reinvestmentRate" step="0.01" required><br>
+        <!-- 입력 필드: 월 투자금 증가율 -->
+        <div class="form-group">
+            <label for="monthlyInvestmentGrowthRate">월 투자금 증가율 (Monthly Investment Growth Rate, %):</label>
+            <input type="number" id="monthlyInvestmentGrowthRate">
+        </div>
 
-            <label for="taxRate">Tax Rate (%): </label>
-            <input type="number" id="taxRate" step="0.01" required><br>
+        <!-- 입력 필드: 배당금 재투자율 -->
+        <div class="form-group">
+            <label for="reinvestmentRate">배당금 재투자율 (Reinvestment Rate, %):</label>
+            <input type="number" id="reinvestmentRate">
+        </div>
 
-            <label for="inflationRate">Inflation Rate (%): </label>
-            <input type="number" id="inflationRate" step="0.01" required><br>
+        <!-- 입력 필드: 세율 -->
+        <div class="form-group">
+            <label for="taxRate">세율 (Tax Rate, %):</label>
+            <input type="number" id="taxRate">
+        </div>
 
-            <label for="targetDividend">Target Monthly Dividend (만원): </label>
-            <input type="number" id="targetDividend" required><br>
+        <!-- 입력 필드: 인플레이션 -->
+        <div class="form-group">
+            <label for="inflationRate">인플레이션 (Inflation Rate, %):</label>
+            <input type="number" id="inflationRate">
+        </div>
 
-            <button type="button" onclick="calculate()">Calculate</button>
-        </form>
+        <!-- 입력 필드: 목표 월 배당금 -->
+        <div class="form-group">
+            <label for="targetMonthlyDividend">목표 월 배당금 (Target Monthly Dividend, 만원):</label>
+            <input type="number" id="targetMonthlyDividend">
+        </div>
 
-        <div id="targetYear"></div>
+        <!-- 계산 버튼 -->
+        <button id="calculateButton">계산하기 (Calculate)</button>
 
+        <!-- 결과 표시 -->
+        <h2>결과 (Results)</h2>
+
+        <!-- 결과를 담을 테이블 -->
         <table id="resultTable">
             <thead>
                 <tr>
-                    <th>Year</th>
-                    <th>Year Start Dividend</th>
-                    <th>Year End Dividend</th>
-                    <th>Year End Assets</th>
-                    <th>Cumulative Investment</th>
-                    <th>Cumulative Reinvested Dividends</th>
+                    <th>연차 (Year)</th>
+                    <th>연말 배당금 (Year End Dividend)</th>
+                    <th>연말 보유 자산 (Year End Assets)</th>
+                    <th>누적 투자 원금 (Cumulative Investment)</th>
+                    <th>누적 재투자 배당금 (Cumulative Reinvested Dividends)</th>
                 </tr>
             </thead>
-            <tbody>
-            </tbody>
+            <tbody></tbody>
         </table>
-    </div>
 
+        <!-- 결과 메시지 표시 -->
+        <p id="resultMessage"></p>
+    </div>
+    <!-- 외부 JavaScript 파일 연결 -->
     <script src="script.js"></script>
 </body>
 </html>
