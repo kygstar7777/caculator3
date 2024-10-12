@@ -1,4 +1,4 @@
-// 계산 버튼 클릭 시 계산 함수 실행
+    // 계산 버튼 클릭 시 계산 함수 실행
 document.getElementById('calculateButton').addEventListener('click', calculate);
 
 function calculate() {
@@ -80,6 +80,9 @@ function calculate() {
 
         // 2년 차 연초 배당금 계산 (1년 차의 배당금에 배당 성장률 적용)
         currentDividend *= (1 + dividendGrowthRate); // 첫 해 배당금에 성장률 적용
+
+        // 2년 차 배당금 계산
+        currentDividend += (totalInvestment + totalReinvestedDividends) * dividendRate * (1 - taxRate) * (1 - inflationRate);
         
         // 매월 투자금에 대한 배당금 계산에 배당 성장률 반영
         annualDividendsFromInvestment *= (1 + dividendGrowthRate); // 배당 성장률 적용
