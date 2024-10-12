@@ -1,4 +1,4 @@
-    // 계산 버튼 클릭 시 계산 함수 실행
+// 계산 버튼 클릭 시 계산 함수 실행
 document.getElementById('calculateButton').addEventListener('click', calculate);
 
 function calculate() {
