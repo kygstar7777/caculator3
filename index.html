@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dividend Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Dividend Calculator</h1>
+        <form id="calculator-form">
+            <label for="initialInvestment">Initial Investment (만원): </label>
+            <input type="number" id="initialInvestment" required><br>
+
+            <label for="dividendYield">Dividend Yield (%): </label>
+            <input type="number" id="dividendYield" step="0.01" required><br>
+
+            <label for="dividendGrowth">Dividend Growth Rate (%): </label>
+            <input type="number" id="dividendGrowth" step="0.01" required><br>
+
+            <label for="stockGrowth">Stock Price Growth Rate (%): </label>
+            <input type="number" id="stockGrowth" step="0.01" required><br>
+
+            <label for="monthlyInvestment">Monthly Investment (만원): </label>
+            <input type="number" id="monthlyInvestment" required><br>
+
+            <label for="monthlyIncreaseRate">Monthly Investment Increase Rate (%): </label>
+            <input type="number" id="monthlyIncreaseRate" step="0.01" required><br>
+
+            <label for="reinvestmentRate">Dividend Reinvestment Rate (%): </label>
+            <input type="number" id="reinvestmentRate" step="0.01" required><br>
+
+            <label for="taxRate">Tax Rate (%): </label>
+            <input type="number" id="taxRate" step="0.01" required><br>
+
+            <label for="inflationRate">Inflation Rate (%): </label>
+            <input type="number" id="inflationRate" step="0.01" required><br>
+
+            <label for="targetDividend">Target Monthly Dividend (만원): </label>
+            <input type="number" id="targetDividend" required><br>
+
+            <button type="button" onclick="calculate()">Calculate</button>
+        </form>
+
+        <div id="targetYear"></div>
+
+        <table id="resultTable">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Year Start Dividend</th>
+                    <th>Year End Dividend</th>
+                    <th>Year End Assets</th>
+                    <th>Cumulative Investment</th>
+                    <th>Cumulative Reinvested Dividends</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
