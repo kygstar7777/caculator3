@@ -78,9 +78,9 @@ function calculate() {
             cumulativeReinvestedDividends: totalReinvestedDividends / 10000 // 누적 재투자 배당금 (만원 단위)
         });
 
-        // 다음 해 배당금 계산 (배당 성장률 반영)
-        currentDividend = (totalInvestment + totalReinvestedDividends) * dividendRate * (1 - taxRate) * (1 - inflationRate) * (1 + dividendGrowthRate);
-
+        // 2년 차 연초 배당금 계산 (1년 차의 배당금에 배당 성장률 적용)
+        currentDividend *= (1 + dividendGrowthRate); // 첫 해 배당금에 성장률 적용
+        
         // 매월 투자금에 대한 배당금 계산에 배당 성장률 반영
         annualDividendsFromInvestment *= (1 + dividendGrowthRate); // 배당 성장률 적용
         
